@@ -1,0 +1,65 @@
+<ion-view view-title="{{params.city}}">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" menu-toggle="left"><span class="icon ion-navicon"></span></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon" ng-click="showOptions()"><span class="icon ion-more"></span></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-scroll direction="y" paging="true" ng-style="{width: getWidth(), height: getHeight()}">
+      <div ng-style="{height: getTotalHeight()}">
+        <div class="scroll-page center" ng-style="{width: getWidth(), height: getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">当日天气</h1>
+          </div>
+          <div class="has-header">
+            <h2 class="primary">{{current[0].temperature}}&deg;</h2>
+            <h2 class="secondary icon" ng-class="current[0].weather | icons"></h2>
+            <p>{{current[0].weather}}</p>
+            <p>湿度: {{current[0].humidity}}%</p>
+            <p>风力: {{current[0].windpower}}</p>
+            <p>风向：{{current[0].winddirection}}</p>
+          </div>
+        </div>
+        <div class="scroll-page" ng-style="{width: getWidth(), height: getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">天气预报</h1>
+          </div>
+          <div class="has-header">
+              <div class="row">
+                  <div class="col col-50">日期</div>
+                  <div class="col">白天</div>
+                  <div class="col">夜间</div>
+                  <div class="col">最高温度</div>
+                  <div class="col">最低温度</div>
+                </div>
+            <div class="row" ng-repeat="day in forecast[0].casts | limitTo:settings.days">
+              <div class="col col-50">{{day.date}}{{day.week | week}}</div>
+              <div class="col"><span class="icon" ng-class="day.dayweather | icons"></span><sup>{{day.dayweather}}</sup></div>
+              <div class="col"><span class="icon" ng-class="day.nightweather | icons"></span><sup>{{day.nightweather}}</sup></div>
+              <div class="col">{{day.daytemp}}&deg;</div>
+              <div class="col">{{day.nighttemp}}&deg;</div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-page" ng-style="{width: getWidth(), height: getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">风力</h1>
+          </div>
+          <div class="has-header">
+              <div class="row">
+                  <div class="col col-50">日期</div>
+                  <div class="col">白天</div>
+                  <div class="col">夜间</div>
+                </div>
+          <div class="row" ng-repeat="day in forecast[0].casts" class="list has-header">
+              <div class="col col-50">{{day.date}}{{day.week | week}}</div>
+            <div class="col">{{day.daywind}}风，风力{{day.daypower}}级</div>
+            <div class="col">{{day.nightwind}}风，风力{{day.nightpower}}级</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>
