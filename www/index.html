@@ -17,6 +17,7 @@
     <script src="lib/moment/moment.js"></script>
     <script src="lib/moment-timezone/builds/moment-timezone-with-data.js"></script>
     <script src="lib/suncalc/suncalc.js"></script>
+      <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -49,7 +50,7 @@
             <ion-item class="item-icon-left" ui-sref="search" menu-close><span class="icon ion-search"></span> 搜索</ion-item>
             <ion-item class="item-icon-left" ui-sref="settings" menu-close><span class="icon ion-ios-cog"></span> 设置</ion-item>
             <ion-item class="item-divider">收藏夹</ion-item>
-            <ion-item class="item-icon-left" ui-sref="weather({city: location.city,adcode: location.adcode})" menu-close ng-repeat="location in locations"><span class="icon ion-ios-location"></span> {{location.city}}</ion-item>
+            <ion-item class="item-icon-left" ui-sref="weather({city: location.city,adcode: location.adcode})" menu-close ng-repeat="location in locations"><span class="icon" ng-class="getIcon(location.current)"></span> {{location.city}}</ion-item>
           </ion-list>
         </ion-content>
       </ion-side-menu>
